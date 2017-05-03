@@ -21,31 +21,31 @@ public class PropertyBasedTest extends TestCase {
   @Rule
   public ExpectedException thrown = none();
 
-  @Property(trials = 10, shrink = false)
-  public void rectangleNegativeHeightOrWidth(int height, int width) {
-    assumeTrue(height < 0 || width < 0);
+  @Property(trials = 150, shrink = true)
+  public void rectangleNonPositiveHeightOrWidth(int height, int width) {
+    assumeTrue(height <= 0 || width <= 0);
 
     thrown.expect(IllegalArgumentException.class);
-    Area.rectangle(height, width);
-  }
-
-  @Property
-  public void rectangleNonNegativeHeightAndWidth(int height, int width) {
-    assumeTrue(height >= 0 && width >= 0);
     assertEquals(height * width, Area.rectangle(height, width));
   }
 
   @Property
-  public void triangleNonNegativeHeightAndWidth(int height, int base) {
-    assumeTrue(height >= 0 && base >= 0);
+  public void rectanglePositiveHeightAndWidth(int height, int width) {
+    assumeTrue(height > 0 && width > 0);
+    assertEquals(height * width, Area.rectangle(height, width));
+  }
+
+  @Property
+  public void trianglePositiveHeightAndWidth(int height, int base) {
+    assumeTrue(height > 0 && base > 0);
     assertEquals((height * base) / 2, Area.triangle(height, base));
   }
 
   @Property
-  public void triangleNegativeHeightOrBase(int height, int base) {
-    assumeTrue(height < 0 || base < 0);
+  public void triangleNonPositiveHeightOrBase(int height, int base) {
+    assumeTrue(height <= 0 || base <= 0);
 
     thrown.expect(IllegalArgumentException.class);
-    Area.rectangle(height, base);
+    assertEquals((height * base) / 2, Area.triangle(height, base));
   }
 }
