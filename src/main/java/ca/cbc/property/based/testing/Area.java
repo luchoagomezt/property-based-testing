@@ -11,16 +11,17 @@ public class Area {
    * @param height height of the triangle
    * @param width width of the triangle
    * @return area of the rectangle
+   * @throws IllegalArgumentException
    */
   public static int rectangle(int height, int width) throws IllegalArgumentException {
-    if (height < 0) {
-      throw new IllegalArgumentException("height is negative");
+    if (height <= 0) {
+      throw new IllegalArgumentException("height is not a positive value");
     }
 
-    if (width < 0) {
-      throw new IllegalArgumentException("width is negative");
+    if (width <= 0) {
+      throw new IllegalArgumentException("width is not a positive value");
     }
-    return 0;
+    return height * width;
   }
 
   public static int triangle(int height, int base) throws IllegalArgumentException {
