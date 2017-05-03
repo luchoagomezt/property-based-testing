@@ -9,33 +9,38 @@ import org.testng.annotations.Test;
  */
 public class ExampleBased {
 
-  @Test()
-  public void areaNonZeroHeight() {
-    AssertJUnit.assertEquals(Area.rectangle(5, 0), 0);
+  @Test(expectedExceptions = { IllegalArgumentException.class })
+  public void positveHeight() {
+    Area.rectangle(5, 0);
   }
 
-  @Test()
-  public void testAreaNonZeroWidth() {
-    AssertJUnit.assertEquals(Area.rectangle(0, 5), 0);
-  }
-
-  @Test()
-  public void testAreaNonZeroWidthAndHeight() {
-    AssertJUnit.assertEquals(Area.rectangle(5, 5), 25);
+  @Test(expectedExceptions = { IllegalArgumentException.class })
+  public void positiveWidth() {
+    Area.rectangle(0, 5);
   }
 
   @Test(expectedExceptions = {IllegalArgumentException.class})
-  public void testAreaNegativeWidth() {
+  public void negativeWidth() {
     Area.rectangle(5, -5);
   }
 
   @Test(expectedExceptions = {IllegalArgumentException.class})
-  public void testAreaNegativeHeight() {
+  public void negativeHeight() {
     Area.rectangle(-5, 5);
   }
 
   @Test()
-  public void testAreaBigInteger() {
+  public void positveWidthAndHeight() { {
+    AssertJUnit.assertEquals(Area.rectangle(5, 5), 25);
+  }
+
+  @Test()
+  public void bigHeight() {
     AssertJUnit.assertEquals(Integer.MAX_VALUE * 5, Area.rectangle(Integer.MAX_VALUE, 5));
+  }
+
+  @Test()
+  public void bigWidth() {
+    AssertJUnit.assertEquals(5 * Integer.MAX_VALUE, Area.rectangle(5, Integer.MAX_VALUE));
   }
 }
